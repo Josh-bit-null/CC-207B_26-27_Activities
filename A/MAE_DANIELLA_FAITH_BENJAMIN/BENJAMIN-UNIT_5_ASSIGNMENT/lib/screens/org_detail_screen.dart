@@ -61,7 +61,7 @@ class OrgDetailScreen extends StatelessWidget {
               // TODO 8: Disable the button (null) when isMember is true;
               //   otherwise call _join(context).
               onPressed: isMember ? null : () => _join(context),
-              icon: Icon(isMember ? Icons.check : Icons.how_to_reg),
+              icon: Icon(isMember ? Icons.check : Icons.how_to_reg), 
               label: Text(
                 isMember ? 'Already a member' : 'Join ${org.acronym}',
               ),
