@@ -44,8 +44,6 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // IndexedStack keeps both screens alive, so the pet counter
-      // does not reset when you switch tabs.
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
@@ -72,9 +70,6 @@ class _HomeShellState extends State<HomeShell> {
   }
 }
 
-// ---------------------------------------------------------------
-// Data class: one row of the info section
-// ---------------------------------------------------------------
 class ProfileInfo {
   final IconData icon;
   final String label;
@@ -87,7 +82,6 @@ class ProfileInfo {
   });
 }
 
-// Example data: replace the values with your real information.
 const List<ProfileInfo> infos = [
   ProfileInfo(icon: Icons.cake, label: 'Birthday', value: 'August 19, 2005'),
   ProfileInfo(
@@ -106,9 +100,6 @@ const List<ProfileInfo> infos = [
       icon: Icons.favorite, label: 'Hobbies', value: 'Music, Gaming'),
 ];
 
-// ---------------------------------------------------------------
-// Profile screen (stateless)
-// ---------------------------------------------------------------
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -126,7 +117,6 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile row: photo on the left, text on the right
             Row(
               children: [
                 ClipOval(
@@ -161,7 +151,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
 
-            // Information section: boxed, built with collection-for
             Card.outlined(
               margin: EdgeInsets.zero,
               child: Padding(
@@ -179,7 +168,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Biography card
             Card.outlined(
               margin: EdgeInsets.zero,
               child: Padding(
@@ -208,9 +196,6 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------
-// One row of the info section (stateless)
-// ---------------------------------------------------------------
 class InfoTile extends StatelessWidget {
   final ProfileInfo info;
 

@@ -71,7 +71,6 @@ class _PetScreenState extends State<PetScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Animal name
             Text(
               _animalName,
               style: theme.textTheme.headlineSmall,
@@ -79,7 +78,6 @@ class _PetScreenState extends State<PetScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Animal photo with double-tap heart
             GestureDetector(
               onDoubleTap: () {
                 setState(() {
@@ -122,7 +120,6 @@ class _PetScreenState extends State<PetScreen> {
 
             const SizedBox(height: 12),
 
-            // Gesture instructions
             Text(
               'Double-tap the picture to show some love.',
               style: theme.textTheme.bodySmall,
@@ -131,7 +128,6 @@ class _PetScreenState extends State<PetScreen> {
 
             const SizedBox(height: 24),
 
-            // Animal sound button
             FilledButton.icon(
               onPressed: _isPlaying ? null : _playSound,
               icon: Icon(
@@ -146,7 +142,6 @@ class _PetScreenState extends State<PetScreen> {
 
             const SizedBox(height: 16),
 
-            // Sound play counter
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
