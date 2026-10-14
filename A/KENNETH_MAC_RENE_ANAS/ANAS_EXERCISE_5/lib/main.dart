@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Kenneth Mac Rene V. Anas | Profile',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF087E78),
+          seedColor: const Color(0xFF69D2C8),
           brightness: Brightness.light,
         ),
         useMaterial3: true,
@@ -83,6 +83,8 @@ class _HomeShellState extends State<HomeShell> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: Text(titles[_selectedIndex]),
         actions: [
           IconButton(
@@ -221,7 +223,7 @@ class ProfileScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: colors.secondaryContainer,
+                  color: colors.primary,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -259,7 +261,7 @@ class ProfileScreen extends StatelessWidget {
                           Text(
                             'Kenneth Mac Rene V. Anas',
                             style: textTheme.titleLarge?.copyWith(
-                              color: colors.onSecondaryContainer,
+                              color: colors.onPrimary,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
@@ -267,7 +269,7 @@ class ProfileScreen extends StatelessWidget {
                           Text(
                             'Third-year IT student focused on Software Development.',
                             style: textTheme.bodyMedium?.copyWith(
-                              color: colors.onSecondaryContainer,
+                              color: colors.onPrimary,
                             ),
                           ),
                         ],
