@@ -7,115 +7,233 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Vincent John Tamaño - Profile & Pet',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepOrange,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: Colors.black,
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomeShell(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class HomeShell extends StatefulWidget {
+  const HomeShell({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeShell> createState() => _HomeShellState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+class _HomeShellState extends State<HomeShell> {
+  @override
+  Widget build(BuildContext context) {
+    return const ProfileScreen();
   }
+}
+
+
+class ProfileInfo {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  const ProfileInfo({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+}
+
+class InfoTile extends StatelessWidget {
+  final ProfileInfo info;
+
+  const InfoTile({super.key, required this.info});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Card(
+        elevation: 0,
+        color: theme.colorScheme.surfaceContainerHighest,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          child: Row(
+            children: [
+              Icon(
+                info.icon,
+                color: theme.colorScheme.primary,
+              ),
+              const SizedBox(width: 16.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      info.label,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: 2.0),
+                    Text(
+                      info.value,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  static const List<ProfileInfo> profileInfos = [
+    ProfileInfo(
+      icon: Icons.school_outlined,
+      label: 'Degree & Track',
+      value: 'BS Information Technology - Cybersecurity Track',
+    ),
+    ProfileInfo(
+      icon: Icons.account_balance_outlined,
+      label: 'University',
+      value: 'West Visayas State University',
+    ),
+    ProfileInfo(
+      icon: Icons.email_outlined,
+      label: 'Email',
+      value: 'vincentjohntamano123@gmail.com',
+    ),
+    ProfileInfo(
+      icon: Icons.phone_outlined,
+      label: 'Phone',
+      value: '+63 945 682 9136',
+    ),
+    ProfileInfo(
+      icon: Icons.sports_esports_outlined,
+      label: 'Hobbies & Interests',
+      value: 'Fishing, Games, Gym',
+    ),
+    ProfileInfo(
+      icon: Icons.location_on_outlined,
+      label: 'Location',
+      value: 'Iloilo City, Philippines',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Vincent John Tamaño'),
+        centerTitle: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('You have pushed the button this many times:'),
+            Row(
+              children: [
+                ClipOval(
+                  child: Image.asset(
+                    'assets/images/ProfileLight.jpg',
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.cover,
+                    semanticLabel: 'Photo of Vincent John Tamaño',
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 90,
+                        height: 90,
+                        color: theme.colorScheme.primaryContainer,
+                        child: Icon(
+                          Icons.person,
+                          size: 48,
+                          color: theme.colorScheme.onPrimaryContainer,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16.0),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Vincent John Tamaño',
+                        style: theme.textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 4.0),
+                      Text(
+                        'BSIT Cybersecurity Student · Aspiring Sysadmin',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24.0),
+
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Profile Information',
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+
+            for (final info in profileInfos) InfoTile(info: info),
+
+            const SizedBox(height: 24.0),
+
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'My Biography',
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 12.0),
+                    Text(
+                      'I am Vincent John Tamaño, a BS Information Technology student specializing in Cybersecurity at West Visayas State University. I am passionate about securing enterprise networks, managing self-hosted Linux homelab systems, and developing software applications. I continuously explore new technologies in systems administration, network engineering, and cross-platform mobile development.',
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
